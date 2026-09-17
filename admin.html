@@ -21,11 +21,94 @@
       <p><strong>Email:</strong> <a href="mailto:amaravatitravels@yahoo.co.in">amaravatitravels@yahoo.co.in</a></p>
     </div>
   </header>
-  <main>
-    <section class="card">
-      <h2>Admin Portal</h2>
-      <p>Administrative tools and overview go here.</p>
+  <main id="admin-main">
+    <!-- Login Screen -->
+    <section class="card" id="admin-login">
+      <h2>Admin Login</h2>
+      <p>Please enter the administrator password to access the dashboard.</p>
+      <form id="login-form" class="booking-form">
+        <div class="form-group">
+          <label for="admin-password">Password</label>
+          <input type="password" id="admin-password" name="admin-password" required />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+      <p id="login-error" style="color: red; display: none; margin-top: 1rem;">Incorrect password.</p>
     </section>
+
+    <!-- Dashboard (Hidden by default) -->
+    <div id="admin-dashboard" class="hidden">
+      <section class="dashboard-header">
+        <h2>Admin Dashboard</h2>
+        <button id="logout-btn" class="logout-btn">Logout</button>
+      </section>
+
+      <!-- Summary Cards -->
+      <section class="summary-cards">
+        <div class="card summary-card">
+          <h3>Total Revenue</h3>
+          <p class="stat">₹ 1,45,000</p>
+        </div>
+        <div class="card summary-card">
+          <h3>Active Bookings</h3>
+          <p class="stat">24</p>
+        </div>
+        <div class="card summary-card">
+          <h3>Available Vehicles</h3>
+          <p class="stat">12</p>
+        </div>
+      </section>
+
+      <!-- Tables and Lists -->
+      <div class="dashboard-grid">
+        <section class="card dashboard-section">
+          <h3>Recent Bookings</h3>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Client</th>
+                <th>Vehicle</th>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Ramesh K.</td><td>AC Sleeper Bus</td><td>Oct 12</td><td>Confirmed</td></tr>
+              <tr><td>Suresh M.</td><td>Innova Crysta</td><td>Oct 15</td><td>Pending</td></tr>
+              <tr><td>Priya T.</td><td>Mini Bus</td><td>Oct 20</td><td>Confirmed</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="card dashboard-section">
+          <h3>Recent Transactions</h3>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Amount</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>#TX101</td><td>₹ 15,000</td><td style="color: green;">Success</td></tr>
+              <tr><td>#TX102</td><td>₹ 8,500</td><td style="color: green;">Success</td></tr>
+              <tr><td>#TX103</td><td>₹ 4,000</td><td style="color: orange;">Pending</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="card dashboard-section">
+          <h3>Vehicle Inventory</h3>
+          <ul class="inventory-list">
+            <li><strong>Volvo Multi-Axle:</strong> 2 Available, 1 On Trip</li>
+            <li><strong>AC Sleeper Bus:</strong> 4 Available, 2 Maintenance</li>
+            <li><strong>Innova Crysta:</strong> 5 Available, 3 On Trip</li>
+            <li><strong>Swift Dzire:</strong> 8 Available, 1 On Trip</li>
+          </ul>
+        </section>
+      </div>
+    </div>
   </main>
   <div class="wave3"></div>
   <footer class="footer">
