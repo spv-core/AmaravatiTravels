@@ -13,7 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Handle login submission
   loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    if (passwordInput.value === ADMIN_PASSWORD) {
+    const entered = passwordInput.value.trim();
+    if (entered === ADMIN_PASSWORD) {
       errorMsg.style.display = 'none';
       loginSection.classList.add('hidden');
       dashboard.classList.remove('hidden');
