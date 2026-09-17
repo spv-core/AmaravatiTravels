@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const dashboard = document.getElementById('admin-dashboard');
   const logoutBtn = document.getElementById('logout-btn');
 
-  const ADMIN_PASSWORD = 'admin123'; // simple client‑side password
+  const ADMIN_PASSWORD = 'Amaravati@3999'; // updated password
 
   // Handle login submission
   loginForm.addEventListener('submit', (e) => {
