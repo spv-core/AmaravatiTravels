@@ -1,0 +1,107 @@
+/* Updated style.css with wave backgrounds and Big Caslon */
+:root {
+  --dark-blue: hsl(220, 60%, 30%);   /* deep blue hint */
+  --blue: hsl(210, 55%, 60%);        /* medium blue */
+  --sky-blue: hsl(210, 70%, 85%);    /* light sky blue */
+  --off-white: hsl(210, 30%, 95%);
+  --accent: hsl(210, 70%, 70%);
+  --text: hsl(210, 15%, 20%);
+  --shadow: rgba(0, 0, 0, 0.1);
+  --radius: 12px;
+}
+
+/* reset */
+* { box-sizing: border-box; margin:0; padding:0; }
+
+body {
+  font-family: 'Big Caslon', serif;
+  background: var(--off-white);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* layered wave backgrounds */
+body::before,
+body::after,
+.wave3 {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+}
+body::before {
+  top: 0;
+  height: 35vh;
+  background: linear-gradient(135deg,
+            var(--dark-blue),
+            var(--blue),
+            var(--sky-blue));
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%);
+}
+body::after {
+  top: 25vh;
+  height: 30vh;
+  background: linear-gradient(135deg,
+            var(--sky-blue),
+            var(--off-white));
+  clip-path: polygon(0 30%, 100% 0, 100% 100%, 0 100%);
+}
+.wave3 {
+  top: 55vh;
+  height: 30vh;
+  background: linear-gradient(135deg,
+            var(--off-white),
+            var(--blue));
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%);
+}
+
+/* header & top‑right contact info */
+header.header {
+  padding: 1rem 2rem;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 6px var(--shadow);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.top-info {
+  text-align: right;
+  font-size: 0.9rem;
+}
+.top-info p { margin:0; }
+
+/* navigation */
+nav ul {
+  list-style:none;
+  display:flex;
+  gap:1.5rem;
+}
+nav a {
+  text-decoration:none;
+  color:var(--text);
+  font-weight:500;
+  transition:color .2s;
+}
+nav a:hover { color:var(--accent); }
+
+/* main content */
+main { flex:1; padding:2rem; }
+section.card {
+  background: rgba(255,255,255,0.7);
+  border-radius: var(--radius);
+  padding:1.5rem;
+  box-shadow:0 4px 12px var(--shadow);
+  backdrop-filter:blur(8px);
+}
+footer.footer {
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  text-align:center;
+  padding:1rem;
+  font-size:0.9rem;
+}
