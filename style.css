@@ -105,3 +105,40 @@ footer.footer {
   padding:1rem;
   font-size:0.9rem;
 }
+
+/* Forms */
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.form-group label {
+  font-weight: 600;
+}
+.booking-form input,
+.booking-form select,
+.booking-form button {
+  padding: 0.8rem;
+  border: 1px solid var(--blue);
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 1rem;
+}
+.booking-form button {
+  background: var(--blue);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s;
+  margin-top: 0.5rem;
+}
+.booking-form button:hover {
+  background: var(--dark-blue);
+}

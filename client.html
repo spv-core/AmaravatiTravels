@@ -26,6 +26,28 @@
       <h2>Client Portal</h2>
       <p>Welcome to the client portal. Here you can book and manage your travel.</p>
     </section>
+
+    <section class="card">
+      <h2>Book a Ride</h2>
+      <form action="#" method="POST" class="booking-form">
+        <div class="form-group">
+          <label for="vehicle-type">Vehicle Type</label>
+          <select id="vehicle-type" name="vehicle-type">
+            <option value="car">Car</option>
+            <option value="bus">Bus</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="start-time">Pickup Date & Time</label>
+          <input type="datetime-local" id="start-time" name="start-time" required />
+        </div>
+        <div class="form-group">
+          <label for="end-time">Return Date & Time</label>
+          <input type="datetime-local" id="end-time" name="end-time" required />
+        </div>
+        <button type="submit">Book Now</button>
+      </form>
+    </section>
   </main>
   <div class="wave3"></div>
   <footer class="footer">
