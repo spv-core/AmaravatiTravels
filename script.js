@@ -1,4 +1,4 @@
-// script.js - Amaravati Travels CMS & Admin Management System
+// script.js - Amaravati Travels Interactive Admin Bookings & Inventory Management
 document.addEventListener('DOMContentLoaded', () => {
   console.log('Amaravati Travels site loaded');
 
@@ -10,62 +10,118 @@ document.addEventListener('DOMContentLoaded', () => {
   const dashboard = document.getElementById('admin-dashboard');
   const logoutBtn = document.getElementById('logout-btn');
 
-  const cmsForm = document.getElementById('cms-settings-form');
-  const cmsWelcomeTitle = document.getElementById('cms-welcome-title');
-  const cmsWelcomeMsg = document.getElementById('cms-welcome-message');
-  const cmsProprietor = document.getElementById('cms-proprietor');
-  const cmsMobile = document.getElementById('cms-mobile');
-  const cmsEmail = document.getElementById('cms-email');
-  const cmsStatusMsg = document.getElementById('cms-status-msg');
-
   const addBookingForm = document.getElementById('add-booking-form');
   const addVehicleForm = document.getElementById('add-vehicle-form');
   const bookingsTbody = document.getElementById('bookings-tbody');
   const inventoryUl = document.getElementById('inventory-ul');
+  const statBookings = document.getElementById('stat-bookings');
+  const statVehicles = document.getElementById('stat-vehicles');
 
   const ADMIN_PASSWORD = 'Amaravati@3999';
 
-  // Default Website Settings
-  const DEFAULT_SETTINGS = {
-    welcomeTitle: 'Welcome to Amaravati Travels',
-    welcomeMessage: 'Looking forward to a great and comfortable journey.',
-    proprietor: 'V. Venkata Raju',
-    mobile: '9393453999',
-    email: 'amaravatitravels@yahoo.co.in'
-  };
+  // Default Bookings Data
+  const DEFAULT_BOOKINGS = [
+    { id: 1, client: 'Ramesh K.', vehicle: 'AC Sleeper Bus', date: 'Oct 12', status: 'Confirmed' },
+    { id: 2, client: 'Suresh M.', vehicle: 'Volvo Multi-Axle Bus', date: 'Oct 15', status: 'Pending' },
+    { id: 3, client: 'Priya T.', vehicle: 'Mini Bus', date: 'Oct 20', status: 'Confirmed' }
+  ];
 
-  // Load Settings from LocalStorage & Apply to DOM
-  function applyWebsiteSettings() {
-    const savedSettings = JSON.parse(localStorage.getItem('amaravati_settings')) || DEFAULT_SETTINGS;
+  // Default Inventory Data
+  const DEFAULT_INVENTORY = [
+    { id: 1, name: 'Volvo Multi-Axle', status: '2 Available, 1 On Trip' },
+    { id: 2, name: 'AC Sleeper Bus', status: '4 Available, 2 Maintenance' },
+    { id: 3, name: 'Non-AC Deluxe Bus', status: '5 Available, 3 On Trip' },
+    { id: 4, name: 'Mini Bus', status: '8 Available, 1 On Trip' }
+  ];
 
-    // Update Top Info Header Elements across pages
-    const elProprietor = document.getElementById('site-proprietor');
-    const elMobile = document.getElementById('site-mobile');
-    const elEmail = document.getElementById('site-email');
-    const elEmailLink = document.getElementById('site-email-link');
-
-    if (elProprietor) elProprietor.textContent = savedSettings.proprietor;
-    if (elMobile) elMobile.textContent = savedSettings.mobile;
-    if (elEmail) elEmail.textContent = savedSettings.email;
-    if (elEmailLink) elEmailLink.href = 'mailto:' + savedSettings.email;
-
-    // Update Welcome Banner in index.html
-    const elWelcomeTitle = document.getElementById('welcome-title');
-    const elWelcomeMessage = document.getElementById('welcome-message');
-
-    if (elWelcomeTitle) elWelcomeTitle.textContent = savedSettings.welcomeTitle;
-    if (elWelcomeMessage) elWelcomeMessage.textContent = savedSettings.welcomeMessage;
-
-    // Populate CMS Admin Form inputs if present
-    if (cmsWelcomeTitle) cmsWelcomeTitle.value = savedSettings.welcomeTitle;
-    if (cmsWelcomeMsg) cmsWelcomeMsg.value = savedSettings.welcomeMessage;
-    if (cmsProprietor) cmsProprietor.value = savedSettings.proprietor;
-    if (cmsMobile) cmsMobile.value = savedSettings.mobile;
-    if (cmsEmail) cmsEmail.value = savedSettings.email;
+  // Load Bookings from LocalStorage
+  function getBookings() {
+    const saved = localStorage.getItem('amaravati_bookings');
+    return saved ? JSON.parse(saved) : DEFAULT_BOOKINGS;
   }
 
-  // Initialize Website Settings on Page Load
-  applyWebsiteSettings();
+  // Save Bookings to LocalStorage
+  function saveBookings(bookings) {
+    localStorage.setItem('amaravati_bookings', JSON.stringify(bookings));
+    renderBookings();
+  }
+
+  // Render Bookings Table
+  function renderBookings() {
+    if (!bookingsTbody) return;
+    const bookings = getBookings();
+    bookingsTbody.innerHTML = '';
+
+    bookings.forEach((item, index) => {
+      const tr = document.createElement('tr');
+      const statusColor = item.status === 'Confirmed' ? '#27ae60' : (item.status === 'Pending' ? '#e67e22' : '#e74c3c');
+
+      tr.innerHTML = `
+        <td contenteditable="true" data-field="client" data-index="${index}">${item.client}</td>
+        <td contenteditable="true" data-field="vehicle" data-index="${index}">${item.vehicle}</td>
+        <td contenteditable="true" data-field="date" data-index="${index}">${item.date}</td>
+        <td>
+          <select class="status-select" data-index="${index}" style="padding: 0.2rem 0.4rem; border-radius: 4px; border: 1px solid #ccc; font-weight: bold; color: ${statusColor};">
+            <option value="Confirmed" ${item.status === 'Confirmed' ? 'selected' : ''}>Confirmed</option>
+            <option value="Pending" ${item.status === 'Pending' ? 'selected' : ''}>Pending</option>
+            <option value="Cancelled" ${item.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
+          </select>
+        </td>
+        <td>
+          <button class="table-btn delete-btn" data-index="${index}">Delete</button>
+        </td>
+      `;
+      bookingsTbody.appendChild(tr);
+    });
+
+    if (statBookings) {
+      statBookings.textContent = bookings.length;
+    }
+  }
+
+  // Load Inventory from LocalStorage
+  function getInventory() {
+    const saved = localStorage.getItem('amaravati_inventory');
+    return saved ? JSON.parse(saved) : DEFAULT_INVENTORY;
+  }
+
+  // Save Inventory to LocalStorage
+  function saveInventory(inventory) {
+    localStorage.setItem('amaravati_inventory', JSON.stringify(inventory));
+    renderInventory();
+  }
+
+  // Render Inventory List
+  function renderInventory() {
+    if (!inventoryUl) return;
+    const inventory = getInventory();
+    inventoryUl.innerHTML = '';
+
+    inventory.forEach((item, index) => {
+      const li = document.createElement('li');
+      li.style.display = 'flex';
+      li.style.justifySpaceBetween = 'space-between';
+      li.style.alignItems = 'center';
+      li.style.gap = '0.5rem';
+
+      li.innerHTML = `
+        <div style="flex: 1;">
+          <strong contenteditable="true" data-inv-field="name" data-index="${index}">${item.name}</strong>: 
+          <span contenteditable="true" data-inv-field="status" data-index="${index}" class="inv-status">${item.status}</span>
+        </div>
+        <button class="table-btn delete-btn delete-inv-btn" data-index="${index}" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;">Remove</button>
+      `;
+      inventoryUl.appendChild(li);
+    });
+
+    if (statVehicles) {
+      statVehicles.textContent = inventory.length;
+    }
+  }
+
+  // Initialize Rendering
+  renderBookings();
+  renderInventory();
 
   // Admin Login Submission
   if (loginForm) {
@@ -99,94 +155,114 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Handle CMS Form Save (Live Website Edits)
-  if (cmsForm) {
-    cmsForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const newSettings = {
-        welcomeTitle: cmsWelcomeTitle.value.trim(),
-        welcomeMessage: cmsWelcomeMsg.value.trim(),
-        proprietor: cmsProprietor.value.trim(),
-        mobile: cmsMobile.value.trim(),
-        email: cmsEmail.value.trim()
-      };
-
-      localStorage.setItem('amaravati_settings', JSON.stringify(newSettings));
-      applyWebsiteSettings();
-
-      if (cmsStatusMsg) {
-        cmsStatusMsg.style.display = 'block';
-        setTimeout(() => {
-          cmsStatusMsg.style.display = 'none';
-        }, 4000);
-      }
-    });
-  }
-
-  // Handle Add New Booking Entry
-  if (addBookingForm && bookingsTbody) {
+  // Handle Adding New Booking
+  if (addBookingForm) {
     addBookingForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const clientName = document.getElementById('new-client-name').value.trim();
-      const vehicleName = document.getElementById('new-vehicle-name').value.trim();
-      const dateVal = document.getElementById('new-booking-date').value.trim();
+      const clientInput = document.getElementById('new-client-name');
+      const vehicleInput = document.getElementById('new-vehicle-name');
+      const dateInput = document.getElementById('new-booking-date');
 
-      if (clientName && vehicleName && dateVal) {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `<td>${clientName}</td><td>${vehicleName}</td><td>${dateVal}</td><td><span style="color:green;">Confirmed</span></td><td><button class="table-btn delete-btn">Cancel</button></td>`;
-        bookingsTbody.appendChild(tr);
+      if (clientInput && vehicleInput && dateInput) {
+        const bookings = getBookings();
+        bookings.push({
+          id: Date.now(),
+          client: clientInput.value.trim(),
+          vehicle: vehicleInput.value.trim(),
+          date: dateInput.value.trim(),
+          status: 'Confirmed'
+        });
+        saveBookings(bookings);
 
-        document.getElementById('new-client-name').value = '';
-        document.getElementById('new-vehicle-name').value = '';
-        document.getElementById('new-booking-date').value = '';
-
-        // Update booking stat badge count
-        const statBookings = document.getElementById('stat-bookings');
-        if (statBookings) {
-          const currentCount = parseInt(statBookings.textContent) || 24;
-          statBookings.textContent = currentCount + 1;
-        }
-      }
-    });
-
-    // Handle Approve / Cancel Buttons on Bookings Table
-    bookingsTbody.addEventListener('click', (e) => {
-      if (e.target.classList.contains('approve-btn')) {
-        const tdStatus = e.target.parentElement.previousElementSibling;
-        if (tdStatus) {
-          tdStatus.innerHTML = '<span style="color:green;">Confirmed</span>';
-        }
-        e.target.remove();
-      } else if (e.target.classList.contains('delete-btn')) {
-        const tr = e.target.closest('tr');
-        if (tr) tr.remove();
+        clientInput.value = '';
+        vehicleInput.value = '';
+        dateInput.value = '';
       }
     });
   }
 
-  // Handle Add New Fleet Bus Entry
-  if (addVehicleForm && inventoryUl) {
-    addVehicleForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const busName = document.getElementById('new-bus-name').value.trim();
-      const busStatus = document.getElementById('new-bus-status').value.trim();
-
-      if (busName && busStatus) {
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>${busName}:</strong> <span class="inv-status">${busStatus}</span>`;
-        inventoryUl.appendChild(li);
-
-        document.getElementById('new-bus-name').value = '';
-        document.getElementById('new-bus-status').value = '';
-
-        // Update vehicle stat badge count
-        const statVehicles = document.getElementById('stat-vehicles');
-        if (statVehicles) {
-          const currentCount = parseInt(statVehicles.textContent) || 12;
-          statVehicles.textContent = currentCount + 1;
+  // Handle Editing & Deleting Bookings
+  if (bookingsTbody) {
+    // Delete booking
+    bookingsTbody.addEventListener('click', (e) => {
+      if (e.target.classList.contains('delete-btn')) {
+        const index = e.target.getAttribute('data-index');
+        if (index !== null) {
+          const bookings = getBookings();
+          bookings.splice(index, 1);
+          saveBookings(bookings);
         }
       }
     });
+
+    // Update status
+    bookingsTbody.addEventListener('change', (e) => {
+      if (e.target.classList.contains('status-select')) {
+        const index = e.target.getAttribute('data-index');
+        const newStatus = e.target.value;
+        if (index !== null) {
+          const bookings = getBookings();
+          bookings[index].status = newStatus;
+          saveBookings(bookings);
+        }
+      }
+    });
+
+    // Edit contenteditable text fields
+    bookingsTbody.addEventListener('blur', (e) => {
+      const field = e.target.getAttribute('data-field');
+      const index = e.target.getAttribute('data-index');
+      if (field && index !== null) {
+        const bookings = getBookings();
+        bookings[index][field] = e.target.textContent.trim();
+        localStorage.setItem('amaravati_bookings', JSON.stringify(bookings));
+      }
+    }, true);
+  }
+
+  // Handle Adding New Inventory Bus
+  if (addVehicleForm) {
+    addVehicleForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nameInput = document.getElementById('new-bus-name');
+      const statusInput = document.getElementById('new-bus-status');
+
+      if (nameInput && statusInput) {
+        const inventory = getInventory();
+        inventory.push({
+          id: Date.now(),
+          name: nameInput.value.trim(),
+          status: statusInput.value.trim()
+        });
+        saveInventory(inventory);
+
+        nameInput.value = '';
+        statusInput.value = '';
+      }
+    });
+  }
+
+  // Handle Editing & Deleting Inventory
+  if (inventoryUl) {
+    inventoryUl.addEventListener('click', (e) => {
+      if (e.target.classList.contains('delete-inv-btn')) {
+        const index = e.target.getAttribute('data-index');
+        if (index !== null) {
+          const inventory = getInventory();
+          inventory.splice(index, 1);
+          saveInventory(inventory);
+        }
+      }
+    });
+
+    inventoryUl.addEventListener('blur', (e) => {
+      const field = e.target.getAttribute('data-inv-field');
+      const index = e.target.getAttribute('data-index');
+      if (field && index !== null) {
+        const inventory = getInventory();
+        inventory[index][field] = e.target.textContent.trim();
+        localStorage.setItem('amaravati_inventory', JSON.stringify(inventory));
+      }
+    }, true);
   }
 });
