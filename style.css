@@ -322,3 +322,117 @@ footer.footer {
 .delete-btn:hover {
   background: #c0392b;
 }
+
+/* Responsive Design System & Media Queries */
+
+/* Tablet & Mobile Screens (<= 768px) */
+@media (max-width: 768px) {
+  header.header {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    text-align: center;
+  }
+
+  header.header h1 {
+    font-size: 1.65rem;
+  }
+
+  nav ul {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.8rem 1.25rem;
+  }
+
+  .top-info {
+    text-align: center;
+    font-size: 0.85rem;
+  }
+
+  main {
+    padding: 1.25rem 1rem;
+  }
+
+  section.card {
+    padding: 1.25rem 1rem;
+  }
+
+  .summary-cards {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .partners-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .fleet-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .dashboard-section {
+    padding: 1rem;
+    overflow-x: auto;
+  }
+
+  .data-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Small Mobile Screens (<= 480px) */
+@media (max-width: 480px) {
+  header.header h1 {
+    font-size: 1.45rem;
+  }
+
+  nav ul {
+    gap: 0.5rem 0.8rem;
+  }
+
+  nav a {
+    font-size: 0.9rem;
+  }
+
+  .partners-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .partners-grid img {
+    padding: 0.5rem;
+  }
+
+  .fleet-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fleet-card img {
+    height: 200px;
+  }
+
+  .table-btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .summary-card .stat {
+    font-size: 1.6rem;
+  }
+}
+
+/* Extra Small Mobile Screens (<= 360px) */
+@media (max-width: 360px) {
+  .partners-grid {
+    grid-template-columns: 1fr;
+  }
+}
