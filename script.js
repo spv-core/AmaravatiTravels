@@ -2,6 +2,16 @@
 document.addEventListener('DOMContentLoaded', () => {
   console.log('Amaravati Travels site loaded');
 
+  // Hamburger menu toggle
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const navMenu = document.getElementById('nav-menu');
+  if (hamburgerBtn && navMenu) {
+    hamburgerBtn.addEventListener('click', () => {
+      hamburgerBtn.classList.toggle('active');
+      navMenu.classList.toggle('open');
+    });
+  }
+
   // DOM Elements
   const loginForm = document.getElementById('login-form');
   const passwordInput = document.getElementById('admin-password');
