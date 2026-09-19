@@ -8,22 +8,30 @@
 </head>
 <body>
   <header class="header">
-    <div class="header-top-row">
+    <div class="header-main">
       <h1>Amaravati Travels</h1>
-      <button class="hamburger-btn" id="hamburger-btn" aria-label="Toggle navigation">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
+      <nav class="desktop-main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html#about-us">About Us</a></li>
+        </ul>
+      </nav>
+      <div class="hamburger-container">
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Toggle navigation">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+        <div class="hamburger-dropdown" id="hamburger-dropdown">
+          <ul>
+            <li class="mobile-only-link"><a href="index.html">Home</a></li>
+            <li class="mobile-only-link"><a href="about.html#about-us">About Us</a></li>
+            <li><a href="about.html#our-fleet">Our Fleet</a></li>
+            <li><a href="admin.html">Admin Portal</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <nav class="nav-menu" id="nav-menu">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html#about-us">About Us</a></li>
-        <li><a href="about.html#our-fleet">Our Fleet</a></li>
-        <li><a href="admin.html">Admin Portal</a></li>
-      </ul>
-    </nav>
     <div class="top-info">
       <p><strong>Proprietor:</strong> <span id="site-proprietor">V. Venkata Raju</span></p>
       <p><strong>Mobile:</strong> <span id="site-mobile">9393453999</span></p>

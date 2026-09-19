@@ -62,39 +62,138 @@ body::after {
 /* header & top‑right contact info */
 header.header {
   padding: 1rem 2rem;
-  background: rgba(255,255,255,0.6);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 6px var(--shadow);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 2px 10px var(--shadow);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: 1000;
 }
 
-.header-top-row {
+.header-main {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 2rem;
+}
+
+.desktop-main-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.desktop-main-nav a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: color 0.2s;
+}
+
+.desktop-main-nav a:hover {
+  color: var(--accent);
+}
+
+/* Hamburger Dropdown Container */
+.hamburger-container {
+  position: relative;
 }
 
 /* Hamburger Toggle Button */
 .hamburger-btn {
-  display: none;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0.4rem;
+  display: flex;
   flex-direction: column;
-  gap: 5px;
-  z-index: 100;
+  justify-content: center;
+  align-items: center;
+  background: rgba(210, 230, 255, 0.5);
+  border: 1px solid var(--blue);
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 0.5rem 0.6rem;
+  gap: 4px;
+  z-index: 1001;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.hamburger-btn:hover {
+  background: var(--sky-blue);
 }
 
 .hamburger-btn .bar {
   display: block;
-  width: 25px;
+  width: 22px;
   height: 3px;
   background-color: var(--dark-blue);
   border-radius: 2px;
   transition: all 0.3s ease;
+}
+
+/* Hamburger Dropdown Menu */
+.hamburger-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(15px);
+  min-width: 180px;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 0.6rem 0;
+  z-index: 1002;
+}
+
+.hamburger-dropdown.open {
+  display: block;
+  animation: fadeInDown 0.25s ease forwards;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hamburger-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hamburger-dropdown li a {
+  display: block;
+  padding: 0.6rem 1.2rem;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s, color 0.2s;
+}
+
+.hamburger-dropdown li a:hover {
+  background: var(--sky-blue);
+  color: var(--dark-blue);
+}
+
+.mobile-only-link {
+  display: none;
+}
+
+.hamburger-btn.active .bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger-btn.active .bar:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-btn.active .bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 .top-info {
@@ -102,20 +201,6 @@ header.header {
   font-size: 0.9rem;
 }
 .top-info p { margin:0; }
-
-/* navigation */
-nav ul {
-  list-style:none;
-  display:flex;
-  gap:1.5rem;
-}
-nav a {
-  text-decoration:none;
-  color:var(--text);
-  font-weight:500;
-  transition:color .2s;
-}
-nav a:hover { color:var(--accent); }
 
 /* main content */
 main { flex:1; padding:2rem; }
@@ -358,46 +443,28 @@ footer.footer {
   header.header {
     flex-direction: column;
     gap: 0.8rem;
-    padding: 1rem 1.25rem;
-    text-align: center;
+    padding: 1rem;
+    align-items: stretch;
   }
 
-  .header-top-row {
+  .header-main {
+    justify-content: space-between;
     width: 100%;
+    gap: 0;
   }
 
-  .hamburger-btn {
-    display: flex;
-  }
-
-  .nav-menu {
+  .desktop-main-nav {
     display: none;
-    width: 100%;
-    margin-top: 0.5rem;
   }
 
-  .nav-menu.open {
+  .mobile-only-link {
     display: block;
   }
 
-  nav ul {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.8rem;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 1rem;
-    border-radius: var(--radius);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-  }
-
-  .hamburger-btn.active .bar:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-  }
-  .hamburger-btn.active .bar:nth-child(2) {
-    opacity: 0;
-  }
-  .hamburger-btn.active .bar:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+  .hamburger-dropdown {
+    right: 0;
+    left: auto;
+    width: 200px;
   }
 
   .top-info {
