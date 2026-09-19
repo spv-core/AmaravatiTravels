@@ -2,28 +2,28 @@
 document.addEventListener('DOMContentLoaded', () => {
   console.log('Amaravati Travels site loaded');
 
-  // Hamburger dropdown menu toggle
+  // Hamburger mobile menu toggle
   const hamburgerBtn = document.getElementById('hamburger-btn');
-  const hamburgerDropdown = document.getElementById('hamburger-dropdown');
+  const navMenu = document.getElementById('nav-menu');
 
-  if (hamburgerBtn && hamburgerDropdown) {
+  if (hamburgerBtn && navMenu) {
     hamburgerBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       hamburgerBtn.classList.toggle('active');
-      hamburgerDropdown.classList.toggle('open');
+      navMenu.classList.toggle('open');
     });
 
     document.addEventListener('click', (e) => {
-      if (!hamburgerBtn.contains(e.target) && !hamburgerDropdown.contains(e.target)) {
+      if (!hamburgerBtn.contains(e.target) && !navMenu.contains(e.target)) {
         hamburgerBtn.classList.remove('active');
-        hamburgerDropdown.classList.remove('open');
+        navMenu.classList.remove('open');
       }
     });
 
-    hamburgerDropdown.querySelectorAll('a').forEach(link => {
+    navMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         hamburgerBtn.classList.remove('active');
-        hamburgerDropdown.classList.remove('open');
+        navMenu.classList.remove('open');
       });
     });
   }
