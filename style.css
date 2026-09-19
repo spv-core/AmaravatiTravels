@@ -297,3 +297,28 @@ footer.footer {
   color: var(--text);
   line-height: 1.4;
 }
+
+/* Admin CMS Table Action Buttons */
+.table-btn {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.approve-btn {
+  background: #27ae60;
+  color: #ffffff;
+}
+.approve-btn:hover {
+  background: #219150;
+}
+.delete-btn {
+  background: #e74c3c;
+  color: #ffffff;
+}
+.delete-btn:hover {
+  background: #c0392b;
+}

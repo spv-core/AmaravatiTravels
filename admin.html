@@ -11,15 +11,15 @@
     <h1>Amaravati Travels</h1>
     <nav>
       <ul>
-        <li><a href="index.html">Client Portal</a></li>
+        <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About Us</a></li>
         <li><a href="admin.html">Admin Portal</a></li>
       </ul>
     </nav>
     <div class="top-info">
-      <p><strong>Proprietor:</strong> V. Venkata Raju</p>
-      <p><strong>Mobile:</strong> 9393453999</p>
-      <p><strong>Email:</strong> <a href="mailto:amaravatitravels@yahoo.co.in">amaravatitravels@yahoo.co.in</a></p>
+      <p><strong>Proprietor:</strong> <span id="site-proprietor">V. Venkata Raju</span></p>
+      <p><strong>Mobile:</strong> <span id="site-mobile">9393453999</span></p>
+      <p><strong>Email:</strong> <a id="site-email-link" href="mailto:amaravatitravels@yahoo.co.in"><span id="site-email">amaravatitravels@yahoo.co.in</span></a></p>
     </div>
   </header>
   <main id="admin-main">
@@ -48,65 +48,103 @@
       <section class="summary-cards">
         <div class="card summary-card">
           <h3>Total Revenue</h3>
-          <p class="stat">₹ 1,45,000</p>
+          <p class="stat" id="stat-revenue">₹ 1,45,000</p>
         </div>
         <div class="card summary-card">
           <h3>Active Bookings</h3>
-          <p class="stat">24</p>
+          <p class="stat" id="stat-bookings">24</p>
         </div>
         <div class="card summary-card">
           <h3>Available Vehicles</h3>
-          <p class="stat">12</p>
+          <p class="stat" id="stat-vehicles">12</p>
         </div>
       </section>
 
-      <!-- Tables and Lists -->
+      <!-- Website Content Management (CMS Controls) -->
+      <section class="card dashboard-section" style="margin-bottom: 2rem;">
+        <h3 style="color: var(--dark-blue); font-size: 1.3rem;">Website Content Management</h3>
+        <p style="margin-bottom: 1.25rem; color: #555;">Update live website text, proprietor details, and welcome banner messages across the entire site.</p>
+        <form id="cms-settings-form" class="booking-form" style="max-width: 680px;">
+          <div class="form-group">
+            <label for="cms-welcome-title">Homepage Welcome Title</label>
+            <input type="text" id="cms-welcome-title" name="welcome-title" placeholder="Welcome to Amaravati Travels" required />
+          </div>
+          <div class="form-group">
+            <label for="cms-welcome-message">Homepage Welcome Message</label>
+            <textarea id="cms-welcome-message" name="welcome-message" rows="3" style="padding:0.8rem; border:1px solid var(--blue); border-radius:var(--radius); font-family:inherit; font-size:1rem;" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="cms-proprietor">Proprietor Name</label>
+            <input type="text" id="cms-proprietor" name="proprietor" placeholder="V. Venkata Raju" required />
+          </div>
+          <div class="form-group">
+            <label for="cms-mobile">Contact Mobile Number</label>
+            <input type="text" id="cms-mobile" name="mobile" placeholder="9393453999" required />
+          </div>
+          <div class="form-group">
+            <label for="cms-email">Contact Email Address</label>
+            <input type="email" id="cms-email" name="email" placeholder="amaravatitravels@yahoo.co.in" required />
+          </div>
+          <button type="submit" style="align-self: flex-start; padding: 0.8rem 1.8rem; font-weight: bold; margin-top: 0.5rem;">Save Website Changes</button>
+        </form>
+        <p id="cms-status-msg" style="color: #27ae60; font-weight: bold; display: none; margin-top: 1rem; font-size: 1.05rem;">✓ Website changes saved successfully!</p>
+      </section>
+
+      <!-- Tables and Management Grid -->
       <div class="dashboard-grid">
         <section class="card dashboard-section">
-          <h3>Recent Bookings</h3>
-          <table class="data-table">
+          <h3>Recent Bookings Management</h3>
+          <table class="data-table" id="bookings-table">
             <thead>
               <tr>
                 <th>Client</th>
                 <th>Vehicle</th>
                 <th>Date</th>
                 <th>Status</th>
+                <th>Action</th>
               </tr>
             </thead>
-            <tbody>
-              <tr><td>Ramesh K.</td><td>AC Sleeper Bus</td><td>Oct 12</td><td>Confirmed</td></tr>
-              <tr><td>Suresh M.</td><td>Volvo Multi-Axle Bus</td><td>Oct 15</td><td>Pending</td></tr>
-              <tr><td>Priya T.</td><td>Mini Bus</td><td>Oct 20</td><td>Confirmed</td></tr>
+            <tbody id="bookings-tbody">
+              <tr><td>Ramesh K.</td><td>AC Sleeper Bus</td><td>Oct 12</td><td><span style="color:green;">Confirmed</span></td><td><button class="table-btn delete-btn">Cancel</button></td></tr>
+              <tr><td>Suresh M.</td><td>Volvo Multi-Axle Bus</td><td>Oct 15</td><td><span style="color:orange;">Pending</span></td><td><button class="table-btn approve-btn">Approve</button></td></tr>
+              <tr><td>Priya T.</td><td>Mini Bus</td><td>Oct 20</td><td><span style="color:green;">Confirmed</span></td><td><button class="table-btn delete-btn">Cancel</button></td></tr>
             </tbody>
           </table>
+          
+          <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--dark-blue);">Add New Booking Entry</h4>
+          <form id="add-booking-form" class="booking-form" style="gap: 0.8rem;">
+            <div class="form-group">
+              <input type="text" id="new-client-name" placeholder="Client Name (e.g. Anand R.)" required />
+            </div>
+            <div class="form-group">
+              <input type="text" id="new-vehicle-name" placeholder="Vehicle Type (e.g. Deluxe AC Bus)" required />
+            </div>
+            <div class="form-group">
+              <input type="text" id="new-booking-date" placeholder="Date (e.g. Oct 25)" required />
+            </div>
+            <button type="submit" style="padding: 0.6rem 1rem;">Add Booking</button>
+          </form>
         </section>
 
         <section class="card dashboard-section">
-          <h3>Recent Transactions</h3>
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Amount</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>#TX101</td><td>₹ 15,000</td><td style="color: green;">Success</td></tr>
-              <tr><td>#TX102</td><td>₹ 8,500</td><td style="color: green;">Success</td></tr>
-              <tr><td>#TX103</td><td>₹ 4,000</td><td style="color: orange;">Pending</td></tr>
-            </tbody>
-          </table>
-        </section>
-
-        <section class="card dashboard-section">
-          <h3>Vehicle Inventory</h3>
-          <ul class="inventory-list">
-            <li><strong>Volvo Multi-Axle:</strong> 2 Available, 1 On Trip</li>
-            <li><strong>AC Sleeper Bus:</strong> 4 Available, 2 Maintenance</li>
-            <li><strong>Non-AC Deluxe Bus:</strong> 5 Available, 3 On Trip</li>
-            <li><strong>Mini Bus:</strong> 8 Available, 1 On Trip</li>
+          <h3>Vehicle Inventory & Fleet Status</h3>
+          <ul class="inventory-list" id="inventory-ul">
+            <li><strong>Volvo Multi-Axle:</strong> <span class="inv-status">2 Available, 1 On Trip</span></li>
+            <li><strong>AC Sleeper Bus:</strong> <span class="inv-status">4 Available, 2 Maintenance</span></li>
+            <li><strong>Non-AC Deluxe Bus:</strong> <span class="inv-status">5 Available, 3 On Trip</span></li>
+            <li><strong>Mini Bus:</strong> <span class="inv-status">8 Available, 1 On Trip</span></li>
           </ul>
+
+          <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--dark-blue);">Add / Update Fleet Bus</h4>
+          <form id="add-vehicle-form" class="booking-form" style="gap: 0.8rem;">
+            <div class="form-group">
+              <input type="text" id="new-bus-name" placeholder="Bus Model Name (e.g. Scania Multi-Axle)" required />
+            </div>
+            <div class="form-group">
+              <input type="text" id="new-bus-status" placeholder="Status (e.g. 3 Available, 1 On Trip)" required />
+            </div>
+            <button type="submit" style="padding: 0.6rem 1rem;">Add Bus to Fleet</button>
+          </form>
         </section>
       </div>
     </div>
