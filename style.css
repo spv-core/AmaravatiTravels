@@ -251,3 +251,49 @@ footer.footer {
 .inventory-list li:last-child {
   border-bottom: none;
 }
+
+/* Our Fleet Gallery Styles */
+.fleet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.25rem;
+}
+
+.fleet-card {
+  background: #ffffff;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fleet-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.fleet-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.fleet-card-body {
+  padding: 1rem 1.25rem;
+}
+
+.fleet-card-body h3 {
+  font-size: 1.1rem;
+  color: var(--dark-blue);
+  margin-bottom: 0.4rem;
+}
+
+.fleet-card-body p {
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.4;
+}
