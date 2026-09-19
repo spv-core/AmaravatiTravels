@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Rashtriya Ispat Nigam Limited logo">
+  <defs>
+    <path id="topTextPath" d="M 90 250 A 160 160 0 0 1 410 250"/>
+    <path id="bottomTextPath" d="M 410 250 A 160 160 0 0 1 90 250"/>
+  </defs>
+
+  <rect width="500" height="500" fill="transparent"/>
+
+  <circle cx="250" cy="250" r="195" fill="#f4f4f4" stroke="#0a7e3c" stroke-width="12"/>
+  <circle cx="250" cy="250" r="165" fill="#0a7e3c"/>
+
+  <g font-family="Noto Sans Devanagari, Arial, sans-serif" font-weight="700" font-size="20" fill="#ffffff">
+    <text>
+      <textPath href="#topTextPath" startOffset="12%" textLength="280">राष्‍ट्रीय इस्पात निगम लिमिटेड</textPath>
+    </text>
+    <text>
+      <textPath href="#bottomTextPath" startOffset="58%" textLength="280">RASHTRIYA ISPAT NIGAM LIMITED</textPath>
+    </text>
+  </g>
+
+  <g>
+    <rect x="145" y="122" width="210" height="255" rx="12" fill="#ffffff"/>
+    <rect x="175" y="150" width="150" height="200" rx="10" fill="#0a7e3c" opacity="0.15"/>
+    <rect x="176" y="148" width="22" height="204" rx="4" fill="#ffffff"/>
+    <rect x="302" y="148" width="22" height="204" rx="4" fill="#ffffff"/>
+    <rect x="164" y="190" width="172" height="22" rx="4" fill="#ffffff"/>
+    <rect x="164" y="284" width="172" height="22" rx="4" fill="#ffffff"/>
+  </g>
+</svg>

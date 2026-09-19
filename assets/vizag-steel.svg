@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 360" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Vizag Steel logo">
+  <rect width="920" height="360" fill="#f2f2f2"/>
+  <g transform="translate(70,15)">
+    <path d="M220 0 L365 0 L510 145 L365 290 L220 290 L75 145 Z" fill="#0f7d3a" stroke="#c79d1d" stroke-width="16"/>
+    <path d="M280 60 L365 60 L445 145 L365 230 L280 230 L200 145 Z" fill="#0e6f35"/>
+    <text x="365" y="188" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="160" font-weight="700" fill="#ffffff">I</text>
+    <text x="365" y="340" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="700" fill="#0f7d3a">VIZAG</text>
+    <text x="365" y="380" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" fill="#0f7d3a">STEEL</text>
+  </g>
+</svg>
