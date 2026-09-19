@@ -100,16 +100,17 @@ document.addEventListener('DOMContentLoaded', () => {
     inventory.forEach((item, index) => {
       const li = document.createElement('li');
       li.style.display = 'flex';
-      li.style.justifySpaceBetween = 'space-between';
+      li.style.justifyContent = 'space-between';
       li.style.alignItems = 'center';
-      li.style.gap = '0.5rem';
+      li.style.padding = '0.6rem 0';
+      li.style.borderBottom = '1px solid rgba(0,0,0,0.1)';
 
       li.innerHTML = `
         <div style="flex: 1;">
           <strong contenteditable="true" data-inv-field="name" data-index="${index}">${item.name}</strong>: 
           <span contenteditable="true" data-inv-field="status" data-index="${index}" class="inv-status">${item.status}</span>
         </div>
-        <button class="table-btn delete-btn delete-inv-btn" data-index="${index}" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;">Remove</button>
+        <button class="table-btn delete-btn delete-inv-btn" data-index="${index}" style="padding: 0.25rem 0.6rem; font-size: 0.8rem;">Remove</button>
       `;
       inventoryUl.appendChild(li);
     });

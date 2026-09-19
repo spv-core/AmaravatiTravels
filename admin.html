@@ -100,10 +100,22 @@
         <section class="card dashboard-section">
           <h3>Vehicle Inventory & Fleet Status</h3>
           <ul class="inventory-list" id="inventory-ul">
-            <li><strong>Volvo Multi-Axle:</strong> <span class="inv-status">2 Available, 1 On Trip</span></li>
-            <li><strong>AC Sleeper Bus:</strong> <span class="inv-status">4 Available, 2 Maintenance</span></li>
-            <li><strong>Non-AC Deluxe Bus:</strong> <span class="inv-status">5 Available, 3 On Trip</span></li>
-            <li><strong>Mini Bus:</strong> <span class="inv-status">8 Available, 1 On Trip</span></li>
+            <li style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,0,0,0.1);">
+              <div><strong contenteditable="true" data-inv-field="name" data-index="0">Volvo Multi-Axle</strong>: <span contenteditable="true" data-inv-field="status" data-index="0" class="inv-status">2 Available, 1 On Trip</span></div>
+              <button class="table-btn delete-btn delete-inv-btn" data-index="0" style="padding: 0.25rem 0.6rem; font-size: 0.8rem;">Remove</button>
+            </li>
+            <li style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,0,0,0.1);">
+              <div><strong contenteditable="true" data-inv-field="name" data-index="1">AC Sleeper Bus</strong>: <span contenteditable="true" data-inv-field="status" data-index="1" class="inv-status">4 Available, 2 Maintenance</span></div>
+              <button class="table-btn delete-btn delete-inv-btn" data-index="1" style="padding: 0.25rem 0.6rem; font-size: 0.8rem;">Remove</button>
+            </li>
+            <li style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,0,0,0.1);">
+              <div><strong contenteditable="true" data-inv-field="name" data-index="2">Non-AC Deluxe Bus</strong>: <span contenteditable="true" data-inv-field="status" data-index="2" class="inv-status">5 Available, 3 On Trip</span></div>
+              <button class="table-btn delete-btn delete-inv-btn" data-index="2" style="padding: 0.25rem 0.6rem; font-size: 0.8rem;">Remove</button>
+            </li>
+            <li style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid rgba(0,0,0,0.1);">
+              <div><strong contenteditable="true" data-inv-field="name" data-index="3">Mini Bus</strong>: <span contenteditable="true" data-inv-field="status" data-index="3" class="inv-status">8 Available, 1 On Trip</span></div>
+              <button class="table-btn delete-btn delete-inv-btn" data-index="3" style="padding: 0.25rem 0.6rem; font-size: 0.8rem;">Remove</button>
+            </li>
           </ul>
 
           <h4 style="margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--dark-blue);">Add / Update Fleet Bus</h4>
