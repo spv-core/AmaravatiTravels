@@ -1,6 +1,6 @@
 // script.js
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('Amaravathi Travels site loaded');
+  console.log('Amaravati Travels site loaded');
   const loginForm = document.getElementById('login-form');
   const passwordInput = document.getElementById('admin-password');
   const errorMsg = document.getElementById('login-error');
