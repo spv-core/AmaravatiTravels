@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 360" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Lee Pharma logo">
+  <rect width="920" height="360" fill="#f2f2f2"/>
+  <g transform="translate(190,30)">
+    <path d="M0 220 L190 0 L380 220 L190 440 Z" fill="#d2a700"/>
+    <path d="M30 220 L190 50 L350 220 L190 390 Z" fill="#0f7d3a"/>
+    <path d="M80 220 L190 110 L300 220 L190 330 Z" fill="#0b6b31" opacity="0.7"/>
+    <path d="M100 220 L190 150 L280 220 L190 290 Z" fill="#0f7d3a" opacity="0.9"/>
+    <path d="M165 45 L264 160 L189 200 L98 160 Z" fill="#d7ba35" opacity="0.6"/>
+  </g>
+  <text x="440" y="215" font-family="Arial, Helvetica, sans-serif" font-size="110" font-weight="700" fill="#2a2a2a">Lee Pharma</text>
+  <text x="440" y="280" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="700" fill="#2a2a2a">Ltd.</text>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Vizag Steel logo">
+  <rect width="500" height="500" fill="#f2f2f2"/>
+  <g transform="translate(30,20)">
+    <path d="M160 0 L340 0 L430 90 L430 270 L340 360 L160 360 L70 270 L70 90 Z" fill="#0b7a39" stroke="#d4ac28" stroke-width="14"/>
+    <path d="M185 40 L315 40 L390 115 L390 245 L315 320 L185 320 L110 245 L110 115 Z" fill="#0a6d32" opacity="0.88"/>
+    <rect x="178" y="88" width="144" height="220" rx="4" fill="#f1f1f1"/>
+    <rect x="205" y="110" width="90" height="175" rx="6" fill="#0b7a39" opacity="0.18"/>
+  </g>
+</svg>
