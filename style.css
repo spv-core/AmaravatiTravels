@@ -330,36 +330,40 @@ footer.footer {
 }
 .password-input-wrapper input {
   width: 100%;
-  padding-right: 5rem !important;
+  padding-right: 4.5rem !important;
 }
-.toggle-password-btn {
+button.toggle-password-btn {
   position: absolute;
   right: 8px;
-  background: transparent;
-  border: none;
-  color: var(--dark-blue);
-  font-size: 0.9rem;
-  font-weight: 700;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent !important;
+  border: none !important;
+  color: var(--dark-blue) !important;
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
   cursor: pointer;
-  padding: 0.35rem 0.6rem;
-  border-radius: 6px;
-  transition: background 0.2s, color 0.2s;
-  margin-top: 0 !important;
+  padding: 0.25rem 0.5rem !important;
+  margin: 0 !important;
+  border-radius: 4px;
+  box-shadow: none !important;
+  outline: none;
+  line-height: 1;
 }
-.toggle-password-btn:hover {
-  background: rgba(0, 80, 180, 0.12);
-  color: var(--blue);
+button.toggle-password-btn:hover {
+  background: rgba(0, 80, 180, 0.1) !important;
+  color: var(--blue) !important;
 }
 .booking-form input,
 .booking-form select,
-.booking-form button {
+.booking-form button:not(.toggle-password-btn) {
   padding: 0.8rem;
   border: 1px solid var(--blue);
   border-radius: var(--radius);
   font-family: inherit;
   font-size: 1rem;
 }
-.booking-form button {
+.booking-form button:not(.toggle-password-btn) {
   background: var(--blue);
   color: white;
   font-weight: 600;
@@ -368,7 +372,7 @@ footer.footer {
   transition: background 0.2s;
   margin-top: 0.5rem;
 }
-.booking-form button:hover {
+.booking-form button:not(.toggle-password-btn):hover {
   background: var(--dark-blue);
 }
 .hidden {
