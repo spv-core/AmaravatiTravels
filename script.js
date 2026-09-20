@@ -344,6 +344,168 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Handle Excel / CSV Import for Bookings
+  const importBookingsBtn = document.getElementById('import-bookings-btn');
+  const excelBookingsFile = document.getElementById('excel-bookings-file');
+  const bookingsImportStatus = document.getElementById('bookings-import-status');
+
+  if (importBookingsBtn && excelBookingsFile) {
+    importBookingsBtn.addEventListener('click', () => {
+      const file = excelBookingsFile.files[0];
+      if (!file) {
+        alert('Please select an Excel (.xlsx/.xls) or CSV (.csv) file first.');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        try {
+          let rows = [];
+          if (file.name.endsWith('.csv')) {
+            const text = e.target.result;
+            const lines = text.split('\n').filter(line => line.trim() !== '');
+            const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+            for (let i = 1; i < lines.length; i++) {
+              const values = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+              let rowObj = {};
+              headers.forEach((h, idx) => {
+                rowObj[h] = values[idx] || '';
+              });
+              rows.push(rowObj);
+            }
+          } else if (typeof XLSX !== 'undefined') {
+            const data = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
+            const firstSheet = workbook.SheetNames[0];
+            rows = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheet]);
+          }
+
+          if (rows && rows.length > 0) {
+            const existingBookings = getBookings();
+            let addedCount = 0;
+
+            rows.forEach(r => {
+              const client = r['Client'] || r['client'] || r['Client Name'] || r['Name'] || '';
+              const vehicle = r['Vehicle'] || r['vehicle'] || r['Vehicle Type'] || r['Bus'] || '';
+              const date = r['Date'] || r['date'] || 'Oct 25';
+              const status = r['Status'] || r['status'] || 'Confirmed';
+
+              if (client && vehicle) {
+                existingBookings.push({
+                  id: Date.now() + Math.random(),
+                  client: client,
+                  vehicle: vehicle,
+                  date: date,
+                  status: status
+                });
+                addedCount++;
+              }
+            });
+
+            saveBookings(existingBookings);
+
+            if (bookingsImportStatus) {
+              bookingsImportStatus.style.display = 'block';
+              bookingsImportStatus.style.color = '#27ae60';
+              bookingsImportStatus.textContent = `✓ Successfully imported ${addedCount} bookings from ${file.name}!`;
+            }
+            excelBookingsFile.value = '';
+          } else {
+            alert('No valid data rows found in the uploaded file.');
+          }
+        } catch (err) {
+          console.error('Error parsing file:', err);
+          alert('Failed to parse file. Please ensure it is a valid CSV or Excel spreadsheet.');
+        }
+      };
+
+      if (file.name.endsWith('.csv')) {
+        reader.readAsText(file);
+      } else {
+        reader.readAsArrayBuffer(file);
+      }
+    });
+  }
+
+  // Handle Excel / CSV Import for Fleet Inventory
+  const importInventoryBtn = document.getElementById('import-inventory-btn');
+  const excelInventoryFile = document.getElementById('excel-inventory-file');
+  const inventoryImportStatus = document.getElementById('inventory-import-status');
+
+  if (importInventoryBtn && excelInventoryFile) {
+    importInventoryBtn.addEventListener('click', () => {
+      const file = excelInventoryFile.files[0];
+      if (!file) {
+        alert('Please select an Excel (.xlsx/.xls) or CSV (.csv) file first.');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        try {
+          let rows = [];
+          if (file.name.endsWith('.csv')) {
+            const text = e.target.result;
+            const lines = text.split('\n').filter(line => line.trim() !== '');
+            const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+            for (let i = 1; i < lines.length; i++) {
+              const values = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+              let rowObj = {};
+              headers.forEach((h, idx) => {
+                rowObj[h] = values[idx] || '';
+              });
+              rows.push(rowObj);
+            }
+          } else if (typeof XLSX !== 'undefined') {
+            const data = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
+            const firstSheet = workbook.SheetNames[0];
+            rows = XLSX.utils.sheet_to_json(workbook.Sheets[firstSheet]);
+          }
+
+          if (rows && rows.length > 0) {
+            const existingInventory = getInventory();
+            let addedCount = 0;
+
+            rows.forEach(r => {
+              const name = r['Vehicle Name'] || r['Name'] || r['name'] || r['Vehicle'] || r['Bus'] || '';
+              const status = r['Status'] || r['status'] || 'Available';
+
+              if (name) {
+                existingInventory.push({
+                  id: Date.now() + Math.random(),
+                  name: name,
+                  status: status
+                });
+                addedCount++;
+              }
+            });
+
+            saveInventory(existingInventory);
+
+            if (inventoryImportStatus) {
+              inventoryImportStatus.style.display = 'block';
+              inventoryImportStatus.style.color = '#27ae60';
+              inventoryImportStatus.textContent = `✓ Successfully imported ${addedCount} inventory items from ${file.name}!`;
+            }
+            excelInventoryFile.value = '';
+          } else {
+            alert('No valid data rows found in the uploaded file.');
+          }
+        } catch (err) {
+          console.error('Error parsing file:', err);
+          alert('Failed to parse file. Please ensure it is a valid CSV or Excel spreadsheet.');
+        }
+      };
+
+      if (file.name.endsWith('.csv')) {
+        reader.readAsText(file);
+      } else {
+        reader.readAsArrayBuffer(file);
+      }
+    });
+  }
+
   // Handle Adding New Booking
   if (addBookingForm) {
     addBookingForm.addEventListener('submit', (e) => {

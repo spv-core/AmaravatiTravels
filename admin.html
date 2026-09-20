@@ -8,6 +8,7 @@
   <meta http-equiv="Expires" content="0" />
   <title>Amaravati Travels – Admin Portal</title>
   <link rel="stylesheet" href="style.css?v=2.5" />
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
 <body>
   <header class="header">
@@ -154,6 +155,40 @@
         <p id="cms-success-msg" style="color: #27ae60; display: none; margin-top: 1rem; font-weight: bold; font-size: 1.05rem; text-align: center;">
           ✓ Website content updated successfully across all pages!
         </p>
+
+        <!-- Bulk Excel / CSV Upload Section (Super Admin Pranathi) -->
+        <div style="margin-top: 1.5rem; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 1.25rem;">
+          <div style="font-weight: bold; color: var(--dark-blue); font-size: 1.1rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 8px;">
+            📊 Bulk Upload Bookings & Inventory (Excel / CSV Import)
+          </div>
+          <p style="margin-bottom: 1rem; color: var(--text); font-size: 0.9rem;">
+            Upload <code>.xlsx</code>, <code>.xls</code>, or <code>.csv</code> spreadsheets to automatically update bookings and vehicle fleet status live on the website.
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+            <!-- Upload Bookings Sheet -->
+            <div style="background: rgba(235, 245, 255, 0.7); padding: 1rem; border-radius: 10px; border: 1px dashed var(--blue);">
+              <h4 style="color: var(--dark-blue); margin-bottom: 0.4rem; font-size: 1rem;">📄 Upload Bookings Spreadsheet</h4>
+              <p style="font-size: 0.82rem; color: var(--text); margin-bottom: 0.75rem;">Expected columns: <code>Client</code>, <code>Vehicle</code>, <code>Date</code>, <code>Status</code></p>
+              <input type="file" id="excel-bookings-file" accept=".csv, .xlsx, .xls" style="font-size: 0.88rem; width: 100%; margin-bottom: 0.6rem;" />
+              <button type="button" id="import-bookings-btn" style="width: 100%; padding: 0.5rem; background: var(--blue); color: #fff; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">
+                Import Bookings Sheet
+              </button>
+              <p id="bookings-import-status" style="display: none; margin-top: 0.5rem; font-size: 0.85rem; font-weight: bold;"></p>
+            </div>
+
+            <!-- Upload Inventory Sheet -->
+            <div style="background: rgba(235, 245, 255, 0.7); padding: 1rem; border-radius: 10px; border: 1px dashed var(--blue);">
+              <h4 style="color: var(--dark-blue); margin-bottom: 0.4rem; font-size: 1rem;">🚌 Upload Fleet Inventory Spreadsheet</h4>
+              <p style="font-size: 0.82rem; color: var(--text); margin-bottom: 0.75rem;">Expected columns: <code>Vehicle Name</code>, <code>Status</code></p>
+              <input type="file" id="excel-inventory-file" accept=".csv, .xlsx, .xls" style="font-size: 0.88rem; width: 100%; margin-bottom: 0.6rem;" />
+              <button type="button" id="import-inventory-btn" style="width: 100%; padding: 0.5rem; background: var(--blue); color: #fff; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;">
+                Import Inventory Sheet
+              </button>
+              <p id="inventory-import-status" style="display: none; margin-top: 0.5rem; font-size: 0.85rem; font-weight: bold;"></p>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- Tables and Management Grid -->
