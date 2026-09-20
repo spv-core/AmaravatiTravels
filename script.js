@@ -28,15 +28,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Password Visibility Toggle
+  // Password Visibility Toggle (SVG Icon)
   const togglePasswordBtn = document.getElementById('toggle-password-btn');
   const passwordInput = document.getElementById('admin-password');
+  const eyeOpen = document.getElementById('eye-icon-open');
+  const eyeClosed = document.getElementById('eye-icon-closed');
 
-  if (togglePasswordBtn && passwordInput) {
-    togglePasswordBtn.addEventListener('click', () => {
+  if (togglePasswordBtn && passwordInput && eyeOpen && eyeClosed) {
+    togglePasswordBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       const isPassword = passwordInput.getAttribute('type') === 'password';
       passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
-      togglePasswordBtn.innerHTML = isPassword ? '🙈 Hide' : '👁️ Show';
+      if (isPassword) {
+        eyeOpen.classList.add('hidden');
+        eyeClosed.classList.remove('hidden');
+        togglePasswordBtn.setAttribute('title', 'Hide password');
+      } else {
+        eyeClosed.classList.add('hidden');
+        eyeOpen.classList.remove('hidden');
+        togglePasswordBtn.setAttribute('title', 'Show password');
+      }
     });
   }
 

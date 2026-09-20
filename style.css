@@ -323,7 +323,7 @@ footer.footer {
 }
 .password-input-wrapper input {
   width: 100%;
-  padding-right: 5.5rem !important;
+  padding-right: 2.8rem !important;
 }
 .toggle-password-btn {
   position: absolute;
@@ -331,19 +331,22 @@ footer.footer {
   background: transparent;
   border: none;
   color: var(--dark-blue);
-  font-size: 0.95rem;
-  font-weight: 700;
   cursor: pointer;
-  padding: 0.35rem 0.6rem;
+  padding: 0.4rem;
   border-radius: 6px;
-  transition: background 0.2s;
   display: flex;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
+  transition: background 0.2s, color 0.2s;
   margin-top: 0 !important;
 }
 .toggle-password-btn:hover {
-  background: rgba(0, 80, 180, 0.1);
+  background: rgba(0, 80, 180, 0.12);
+  color: var(--blue);
+}
+.toggle-password-btn svg {
+  display: block;
+  stroke: currentColor;
 }
 .booking-form input,
 .booking-form select,
