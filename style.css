@@ -315,6 +315,36 @@ footer.footer {
 .form-group label {
   font-weight: 600;
 }
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.password-input-wrapper input {
+  width: 100%;
+  padding-right: 5.5rem !important;
+}
+.toggle-password-btn {
+  position: absolute;
+  right: 8px;
+  background: transparent;
+  border: none;
+  color: var(--dark-blue);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0.35rem 0.6rem;
+  border-radius: 6px;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 0 !important;
+}
+.toggle-password-btn:hover {
+  background: rgba(0, 80, 180, 0.1);
+}
 .booking-form input,
 .booking-form select,
 .booking-form button {

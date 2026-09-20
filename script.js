@@ -28,9 +28,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Password Visibility Toggle
+  const togglePasswordBtn = document.getElementById('toggle-password-btn');
+  const passwordInput = document.getElementById('admin-password');
+
+  if (togglePasswordBtn && passwordInput) {
+    togglePasswordBtn.addEventListener('click', () => {
+      const isPassword = passwordInput.getAttribute('type') === 'password';
+      passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+      togglePasswordBtn.innerHTML = isPassword ? '🙈 Hide' : '👁️ Show';
+    });
+  }
+
   // DOM Elements
   const loginForm = document.getElementById('login-form');
-  const passwordInput = document.getElementById('admin-password');
   const errorMsg = document.getElementById('login-error');
   const loginSection = document.getElementById('admin-login');
   const dashboard = document.getElementById('admin-dashboard');
