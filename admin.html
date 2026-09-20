@@ -95,6 +95,68 @@
         </div>
       </section>
 
+      <!-- Website Content Management (Full Web Control - Exclusive to Super Admin Pranathi) -->
+      <section class="card dashboard-section hidden" id="cms-section" style="margin-bottom: 1.5rem; border: 2px solid var(--dark-blue);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 0.75rem;">
+          <div>
+            <h3 style="font-size: 1.35rem; color: var(--dark-blue); margin: 0;">Website Content Management (Entire Website Control)</h3>
+            <p style="margin-top: 0.25rem; font-size: 0.9rem; color: var(--text);">Exclusive Super Admin controls for <strong>Pranathi</strong> to edit text, contact info, and messages across all pages.</p>
+          </div>
+          <span class="role-badge" style="background: var(--dark-blue); color: #ffffff; padding: 0.4rem 0.9rem; border-radius: 20px; font-size: 0.85rem; font-weight: bold;">
+            👑 Super Admin: Pranathi
+          </span>
+        </div>
+
+        <form id="site-content-form" class="booking-form" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem;">
+          <div style="grid-column: 1 / -1; font-weight: bold; color: var(--dark-blue); font-size: 1.05rem; margin-top: 0.25rem;">
+            📞 Header & Contact Info Settings
+          </div>
+          <div class="form-group">
+            <label for="cms-proprietor">Proprietor Name</label>
+            <input type="text" id="cms-proprietor" placeholder="e.g. V. Venkata Raju" />
+          </div>
+          <div class="form-group">
+            <label for="cms-mobile">Mobile Number</label>
+            <input type="text" id="cms-mobile" placeholder="e.g. 9393453999" />
+          </div>
+          <div class="form-group">
+            <label for="cms-email">Email Address</label>
+            <input type="email" id="cms-email" placeholder="e.g. amaravatitravels@yahoo.co.in" />
+          </div>
+
+          <div style="grid-column: 1 / -1; font-weight: bold; color: var(--dark-blue); font-size: 1.05rem; margin-top: 0.5rem;">
+            🏠 Homepage Hero Section Settings
+          </div>
+          <div class="form-group">
+            <label for="cms-welcome-title">Home Welcome Headline</label>
+            <input type="text" id="cms-welcome-title" placeholder="e.g. Welcome to Amaravati Travels" />
+          </div>
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label for="cms-welcome-msg">Home Welcome Sub-Message</label>
+            <input type="text" id="cms-welcome-msg" placeholder="e.g. Looking forward to a great and comfortable journey." />
+          </div>
+
+          <div style="grid-column: 1 / -1; font-weight: bold; color: var(--dark-blue); font-size: 1.05rem; margin-top: 0.5rem;">
+            ℹ️ About Us & Partnerships Content Settings
+          </div>
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label for="cms-partnerships-text">Our Partnerships Description</label>
+            <input type="text" id="cms-partnerships-text" placeholder="e.g. Over the past 20 years, Amaravati Travels has built strong corporate partnerships..." />
+          </div>
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label for="cms-about-text">About Us Story Text</label>
+            <input type="text" id="cms-about-text" placeholder="e.g. For the past 20 years, Amaravati Travels has grown from a single-vehicle operation..." />
+          </div>
+
+          <button type="submit" style="grid-column: 1 / -1; padding: 0.85rem; background: var(--dark-blue); font-size: 1.05rem; font-weight: bold;">
+            Save & Apply Changes to Entire Website
+          </button>
+        </form>
+        <p id="cms-success-msg" style="color: #27ae60; display: none; margin-top: 1rem; font-weight: bold; font-size: 1.05rem; text-align: center;">
+          ✓ Website content updated successfully across all pages!
+        </p>
+      </section>
+
       <!-- Tables and Management Grid -->
       <div class="dashboard-grid">
         <section class="card dashboard-section">
@@ -162,39 +224,6 @@
             </div>
             <button type="submit" style="padding: 0.6rem 1rem;">Add Bus to Fleet</button>
           </form>
-        </section>
-
-        <!-- Website Content Management (Full Web Control - Exclusive to Pranathi) -->
-        <section class="card dashboard-section hidden" id="cms-section" style="grid-column: 1 / -1; margin-top: 1rem;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
-            <h3>Website Content Management (Super Admin Control)</h3>
-            <span class="role-badge" style="background: var(--dark-blue); color: #fff; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: bold;">Full Web Access: Pranathi</span>
-          </div>
-          <p style="margin-bottom: 1.25rem; color: var(--text);">Update website contact details, proprietor info, and welcome messages in real time across all pages.</p>
-          <form id="site-content-form" class="booking-form" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem;">
-            <div class="form-group">
-              <label for="cms-proprietor">Proprietor Name</label>
-              <input type="text" id="cms-proprietor" placeholder="e.g. V. Venkata Raju" />
-            </div>
-            <div class="form-group">
-              <label for="cms-mobile">Mobile Number</label>
-              <input type="text" id="cms-mobile" placeholder="e.g. 9393453999" />
-            </div>
-            <div class="form-group">
-              <label for="cms-email">Email Address</label>
-              <input type="email" id="cms-email" placeholder="e.g. amaravatitravels@yahoo.co.in" />
-            </div>
-            <div class="form-group">
-              <label for="cms-welcome-title">Home Welcome Headline</label>
-              <input type="text" id="cms-welcome-title" placeholder="e.g. Welcome to Amaravati Travels" />
-            </div>
-            <div class="form-group" style="grid-column: 1 / -1;">
-              <label for="cms-welcome-msg">Home Welcome Message</label>
-              <input type="text" id="cms-welcome-msg" placeholder="e.g. Looking forward to a great and comfortable journey." />
-            </div>
-            <button type="submit" style="grid-column: 1 / -1; padding: 0.8rem; background: var(--dark-blue);">Save Website Content Changes</button>
-          </form>
-          <p id="cms-success-msg" style="color: #27ae60; display: none; margin-top: 0.8rem; font-weight: bold;">Website content updated successfully across all pages!</p>
         </section>
       </div>
     </div>

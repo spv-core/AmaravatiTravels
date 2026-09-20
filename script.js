@@ -169,6 +169,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const email = localStorage.getItem('amaravati_email');
     const title = localStorage.getItem('amaravati_welcome_title');
     const msg = localStorage.getItem('amaravati_welcome_msg');
+    const partners = localStorage.getItem('amaravati_partnerships_text');
+    const about = localStorage.getItem('amaravati_about_text');
 
     if (prop) {
       document.querySelectorAll('#site-proprietor').forEach(el => el.textContent = prop);
@@ -187,6 +189,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const welcomeMsgEl = document.getElementById('welcome-message');
     if (msg && welcomeMsgEl) {
       welcomeMsgEl.textContent = msg;
+    }
+    const partnersTextEl = document.getElementById('partnerships-desc-text');
+    if (partners && partnersTextEl) {
+      partnersTextEl.textContent = partners;
+    }
+    const aboutTextEl = document.getElementById('about-story-text');
+    if (about && aboutTextEl) {
+      aboutTextEl.textContent = about;
     }
   }
 
@@ -238,6 +248,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (cmsMail) cmsMail.value = localStorage.getItem('amaravati_email') || 'amaravatitravels@yahoo.co.in';
         if (cmsTitle) cmsTitle.value = localStorage.getItem('amaravati_welcome_title') || 'Welcome to Amaravati Travels';
         if (cmsMsg) cmsMsg.value = localStorage.getItem('amaravati_welcome_msg') || 'Looking forward to a great and comfortable journey.';
+        const cmsPartners = document.getElementById('cms-partnerships-text');
+        const cmsAbout = document.getElementById('cms-about-text');
+        if (cmsPartners) cmsPartners.value = localStorage.getItem('amaravati_partnerships_text') || 'Over the past 20 years, Amaravati Travels has built strong corporate partnerships...';
+        if (cmsAbout) cmsAbout.value = localStorage.getItem('amaravati_about_text') || 'For the past 20 years, Amaravati Travels has grown from a single-vehicle operation...';
       } else {
         cmsSection.classList.add('hidden');
       }
@@ -308,12 +322,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const cmsMail = document.getElementById('cms-email');
       const cmsTitle = document.getElementById('cms-welcome-title');
       const cmsMsg = document.getElementById('cms-welcome-msg');
+      const cmsPartners = document.getElementById('cms-partnerships-text');
+      const cmsAbout = document.getElementById('cms-about-text');
 
       if (cmsProp && cmsProp.value.trim()) localStorage.setItem('amaravati_proprietor', cmsProp.value.trim());
       if (cmsMob && cmsMob.value.trim()) localStorage.setItem('amaravati_mobile', cmsMob.value.trim());
       if (cmsMail && cmsMail.value.trim()) localStorage.setItem('amaravati_email', cmsMail.value.trim());
       if (cmsTitle && cmsTitle.value.trim()) localStorage.setItem('amaravati_welcome_title', cmsTitle.value.trim());
       if (cmsMsg && cmsMsg.value.trim()) localStorage.setItem('amaravati_welcome_msg', cmsMsg.value.trim());
+      if (cmsPartners && cmsPartners.value.trim()) localStorage.setItem('amaravati_partnerships_text', cmsPartners.value.trim());
+      if (cmsAbout && cmsAbout.value.trim()) localStorage.setItem('amaravati_about_text', cmsAbout.value.trim());
 
       loadSiteContent();
 
