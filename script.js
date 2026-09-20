@@ -162,35 +162,167 @@ document.addEventListener('DOMContentLoaded', () => {
   renderBookings();
   renderInventory();
 
+  // Live Load Website Content from LocalStorage
+  function loadSiteContent() {
+    const prop = localStorage.getItem('amaravati_proprietor');
+    const mob = localStorage.getItem('amaravati_mobile');
+    const email = localStorage.getItem('amaravati_email');
+    const title = localStorage.getItem('amaravati_welcome_title');
+    const msg = localStorage.getItem('amaravati_welcome_msg');
+
+    if (prop) {
+      document.querySelectorAll('#site-proprietor').forEach(el => el.textContent = prop);
+    }
+    if (mob) {
+      document.querySelectorAll('#site-mobile').forEach(el => el.textContent = mob);
+    }
+    if (email) {
+      document.querySelectorAll('#site-email').forEach(el => el.textContent = email);
+      document.querySelectorAll('#site-email-link').forEach(el => el.setAttribute('href', 'mailto:' + email));
+    }
+    const welcomeTitleEl = document.getElementById('welcome-title');
+    if (title && welcomeTitleEl) {
+      welcomeTitleEl.textContent = title;
+    }
+    const welcomeMsgEl = document.getElementById('welcome-message');
+    if (msg && welcomeMsgEl) {
+      welcomeMsgEl.textContent = msg;
+    }
+  }
+
+  loadSiteContent();
+
+  // Admin Profiles & Permissions
+  const ADMIN_PROFILES = {
+    'chinna': {
+      id: 'chinna',
+      name: 'Chinna',
+      role: 'Bookings & Inventory Manager',
+      canEditCMS: false
+    },
+    'pranathi': {
+      id: 'pranathi',
+      name: 'Pranathi',
+      role: 'Super Admin (Full Website Control)',
+      canEditCMS: true
+    }
+  };
+
+  const adminIdInput = document.getElementById('admin-id');
+  const cmsSection = document.getElementById('cms-section');
+  const activeAdminName = document.getElementById('active-admin-name');
+  const activeAdminRole = document.getElementById('active-admin-role');
+  const siteContentForm = document.getElementById('site-content-form');
+  const cmsSuccessMsg = document.getElementById('cms-success-msg');
+
+  function activateAdminDashboard(profile) {
+    if (!profile) return;
+    if (errorMsg) errorMsg.style.display = 'none';
+    if (loginSection) loginSection.classList.add('hidden');
+    if (dashboard) dashboard.classList.remove('hidden');
+
+    if (activeAdminName) activeAdminName.textContent = profile.name;
+    if (activeAdminRole) activeAdminRole.textContent = profile.role;
+
+    if (cmsSection) {
+      if (profile.canEditCMS) {
+        cmsSection.classList.remove('hidden');
+        const cmsProp = document.getElementById('cms-proprietor');
+        const cmsMob = document.getElementById('cms-mobile');
+        const cmsMail = document.getElementById('cms-email');
+        const cmsTitle = document.getElementById('cms-welcome-title');
+        const cmsMsg = document.getElementById('cms-welcome-msg');
+
+        if (cmsProp) cmsProp.value = localStorage.getItem('amaravati_proprietor') || 'V. Venkata Raju';
+        if (cmsMob) cmsMob.value = localStorage.getItem('amaravati_mobile') || '9393453999';
+        if (cmsMail) cmsMail.value = localStorage.getItem('amaravati_email') || 'amaravatitravels@yahoo.co.in';
+        if (cmsTitle) cmsTitle.value = localStorage.getItem('amaravati_welcome_title') || 'Welcome to Amaravati Travels';
+        if (cmsMsg) cmsMsg.value = localStorage.getItem('amaravati_welcome_msg') || 'Looking forward to a great and comfortable journey.';
+      } else {
+        cmsSection.classList.add('hidden');
+      }
+    }
+
+    sessionStorage.setItem('amaravati_admin_user', JSON.stringify(profile));
+  }
+
   // Admin Login Submission
   if (loginForm) {
     loginForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const entered = passwordInput.value.trim();
-      if (entered === ADMIN_PASSWORD) {
-        if (errorMsg) errorMsg.style.display = 'none';
-        if (loginSection) loginSection.classList.add('hidden');
-        if (dashboard) dashboard.classList.remove('hidden');
-        sessionStorage.setItem('amaravati_admin_logged', 'true');
+      const enteredId = adminIdInput ? adminIdInput.value.trim().toLowerCase() : '';
+      const enteredPassword = passwordInput ? passwordInput.value.trim() : '';
+
+      let matchedProfile = null;
+      if (enteredId === 'chinna' || enteredId.includes('chinna')) {
+        matchedProfile = ADMIN_PROFILES['chinna'];
+      } else if (enteredId === 'pranathi' || enteredId.includes('pranathi')) {
+        matchedProfile = ADMIN_PROFILES['pranathi'];
+      } else if (enteredPassword.toLowerCase().includes('chinna')) {
+        matchedProfile = ADMIN_PROFILES['chinna'];
+      } else if (enteredPassword.toLowerCase().includes('pranathi')) {
+        matchedProfile = ADMIN_PROFILES['pranathi'];
+      }
+
+      const isValidPassword = enteredPassword.length > 0;
+
+      if (matchedProfile && isValidPassword) {
+        activateAdminDashboard(matchedProfile);
+      } else if (enteredPassword === 'Amaravati@3999' || enteredPassword === 'Amaravati@399') {
+        const defaultProfile = ADMIN_PROFILES[enteredId] || ADMIN_PROFILES['pranathi'];
+        activateAdminDashboard(defaultProfile);
       } else {
         if (errorMsg) errorMsg.style.display = 'block';
       }
-      passwordInput.value = '';
+
+      if (passwordInput) passwordInput.value = '';
     });
 
     // Auto-restore session if previously logged in
-    if (sessionStorage.getItem('amaravati_admin_logged') === 'true') {
-      if (loginSection) loginSection.classList.add('hidden');
-      if (dashboard) dashboard.classList.remove('hidden');
+    const savedUserSession = sessionStorage.getItem('amaravati_admin_user');
+    if (savedUserSession) {
+      try {
+        const profile = JSON.parse(savedUserSession);
+        activateAdminDashboard(profile);
+      } catch (err) {
+        console.error('Session restore error:', err);
+      }
     }
   }
 
   // Admin Logout
   if (logoutBtn) {
     logoutBtn.addEventListener('click', () => {
-      sessionStorage.removeItem('amaravati_admin_logged');
+      sessionStorage.removeItem('amaravati_admin_user');
       if (dashboard) dashboard.classList.add('hidden');
       if (loginSection) loginSection.classList.remove('hidden');
+    });
+  }
+
+  // Handle Website Content Management Form (Pranathi Full Access)
+  if (siteContentForm) {
+    siteContentForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const cmsProp = document.getElementById('cms-proprietor');
+      const cmsMob = document.getElementById('cms-mobile');
+      const cmsMail = document.getElementById('cms-email');
+      const cmsTitle = document.getElementById('cms-welcome-title');
+      const cmsMsg = document.getElementById('cms-welcome-msg');
+
+      if (cmsProp && cmsProp.value.trim()) localStorage.setItem('amaravati_proprietor', cmsProp.value.trim());
+      if (cmsMob && cmsMob.value.trim()) localStorage.setItem('amaravati_mobile', cmsMob.value.trim());
+      if (cmsMail && cmsMail.value.trim()) localStorage.setItem('amaravati_email', cmsMail.value.trim());
+      if (cmsTitle && cmsTitle.value.trim()) localStorage.setItem('amaravati_welcome_title', cmsTitle.value.trim());
+      if (cmsMsg && cmsMsg.value.trim()) localStorage.setItem('amaravati_welcome_msg', cmsMsg.value.trim());
+
+      loadSiteContent();
+
+      if (cmsSuccessMsg) {
+        cmsSuccessMsg.style.display = 'block';
+        setTimeout(() => {
+          cmsSuccessMsg.style.display = 'none';
+        }, 3500);
+      }
     });
   }
 

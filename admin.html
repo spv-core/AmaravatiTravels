@@ -43,27 +43,39 @@
     <!-- Login Screen -->
     <section class="card" id="admin-login">
       <h2>Admin Login</h2>
-      <p>Please enter the administrator password to access the dashboard.</p>
+      <p>Please enter your Admin ID and password to access the portal.</p>
       <form id="login-form" class="booking-form">
+        <div class="form-group">
+          <label for="admin-id">
+            <svg class="label-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            Admin ID
+          </label>
+          <input type="text" id="admin-id" name="admin-id" placeholder="Enter Admin ID (e.g. Chinna or Pranathi)" required />
+        </div>
         <div class="form-group">
           <label for="admin-password">
             <svg class="label-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
             Password
           </label>
           <div class="password-input-wrapper">
-            <input type="password" id="admin-password" name="admin-password" required />
+            <input type="password" id="admin-password" name="admin-password" placeholder="Enter Password" required />
             <button type="button" id="toggle-password-btn" class="toggle-password-btn" aria-label="Toggle password visibility">Show</button>
           </div>
         </div>
         <button type="submit">Login</button>
       </form>
-      <p id="login-error" style="color: red; display: none; margin-top: 1rem;">Incorrect password.</p>
+      <p id="login-error" style="color: red; display: none; margin-top: 1rem;">Invalid Admin ID or Password.</p>
     </section>
 
     <!-- Dashboard (Hidden by default) -->
     <div id="admin-dashboard" class="hidden">
-      <section class="dashboard-header">
-        <h2>Admin Dashboard</h2>
+      <section class="dashboard-header" style="flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <h2>Admin Dashboard</h2>
+          <p id="admin-profile-badge" style="font-weight: bold; color: var(--dark-blue); margin-top: 0.25rem;">
+            Logged in as: <span id="active-admin-name">Admin</span> (<span id="active-admin-role">Manager</span>)
+          </p>
+        </div>
         <button id="logout-btn" class="logout-btn">Logout</button>
       </section>
 
@@ -150,6 +162,39 @@
             </div>
             <button type="submit" style="padding: 0.6rem 1rem;">Add Bus to Fleet</button>
           </form>
+        </section>
+
+        <!-- Website Content Management (Full Web Control - Exclusive to Pranathi) -->
+        <section class="card dashboard-section hidden" id="cms-section" style="grid-column: 1 / -1; margin-top: 1rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+            <h3>Website Content Management (Super Admin Control)</h3>
+            <span class="role-badge" style="background: var(--dark-blue); color: #fff; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.85rem; font-weight: bold;">Full Web Access: Pranathi</span>
+          </div>
+          <p style="margin-bottom: 1.25rem; color: var(--text);">Update website contact details, proprietor info, and welcome messages in real time across all pages.</p>
+          <form id="site-content-form" class="booking-form" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem;">
+            <div class="form-group">
+              <label for="cms-proprietor">Proprietor Name</label>
+              <input type="text" id="cms-proprietor" placeholder="e.g. V. Venkata Raju" />
+            </div>
+            <div class="form-group">
+              <label for="cms-mobile">Mobile Number</label>
+              <input type="text" id="cms-mobile" placeholder="e.g. 9393453999" />
+            </div>
+            <div class="form-group">
+              <label for="cms-email">Email Address</label>
+              <input type="email" id="cms-email" placeholder="e.g. amaravatitravels@yahoo.co.in" />
+            </div>
+            <div class="form-group">
+              <label for="cms-welcome-title">Home Welcome Headline</label>
+              <input type="text" id="cms-welcome-title" placeholder="e.g. Welcome to Amaravati Travels" />
+            </div>
+            <div class="form-group" style="grid-column: 1 / -1;">
+              <label for="cms-welcome-msg">Home Welcome Message</label>
+              <input type="text" id="cms-welcome-msg" placeholder="e.g. Looking forward to a great and comfortable journey." />
+            </div>
+            <button type="submit" style="grid-column: 1 / -1; padding: 0.8rem; background: var(--dark-blue);">Save Website Content Changes</button>
+          </form>
+          <p id="cms-success-msg" style="color: #27ae60; display: none; margin-top: 0.8rem; font-weight: bold;">Website content updated successfully across all pages!</p>
         </section>
       </div>
     </div>
