@@ -293,3 +293,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }, true);
   }
 });
+
+// Force fresh page reload when opening or navigating back
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) {
+    window.location.reload();
+  }
+});

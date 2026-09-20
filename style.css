@@ -479,7 +479,7 @@ footer.footer {
   }
 
   .header-nav-bar {
-    justify-content: flex-end;
+    justify-content: flex-start;
   }
 
   .hamburger-btn {
@@ -509,7 +509,7 @@ footer.footer {
   .nav-menu a {
     display: block;
     width: 100%;
-    text-align: center;
+    text-align: left;
     padding: 0.75rem 1rem;
   }
 
